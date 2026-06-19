@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Bulletin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 16px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #e1e1e1;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: #fff;
+        }
+        tbody tr:hover {
+            background: #f1f7ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ajouter un étudiant</h1>
+    <form id="studentForm">
+        <label for="matricule">Matricule</label>
+        <input type="text" id="matricule" name="matricule" required>
+
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" name="prenom" required>
+
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" name="nom" required>
+
+        <label for="filiere">Filière</label>
+        <input type="text" id="filiere" name="filiere" required>
+
+        <label for="niveau">Niveau</label>
+        <select id="niveau" name="niveau" required>
+            <option value="">Choisir un niveau</option>
+            <option value="1ère année">1ère année</option>
+            <option value="2ème année">2ème année</option>
+            <option value="3ème année">3ème année</option>
+            <option value="Master">Master</option>
+        </select>
+
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <h2>Tableau des étudiants</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Filière</th>
+                <th>Niveau</th>
+            </tr>
+        </thead>
+        <tbody id="studentTableBody">
+            <tr>
+                <td colspan="5" style="text-align:center; color:#666;">Aucun étudiant ajouté pour le moment.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const form = document.getElementById('studentForm');
+        const tableBody = document.getElementById('studentTableBody');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const matricule = document.getElementById('matricule').value.trim();
+            const prenom = document.getElementById('prenom').value.trim();
+            const nom = document.getElementById('nom').value.trim();
+            const filiere = document.getElementById('filiere').value.trim();
+            const niveau = document.getElementById('niveau').value;
+
+            if (!matricule || !prenom || !nom || !filiere || !niveau) {
+                return;
+            }
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${matricule}</td>
+                <td>${prenom}</td>
+                <td>${nom}</td>
+                <td>${filiere}</td>
+                <td>${niveau}</td>
+            `;
+
+            if (tableBody.children.length === 1 && tableBody.children[0].children.length === 1) {
+                tableBody.innerHTML = '';
+            }
+
+            tableBody.appendChild(row);
+            form.reset();
+            document.getElementById('matricule').focus();
+        });
+    </script>
+</body>
+</html>

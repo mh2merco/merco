@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Paiement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f7f8fb;
+        }
+        h1 {
+            color: #2d2d2d;
+        }
+        form {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            max-width: 520px;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccd0d8;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 18px;
+            background: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .success-message {
+            color: #155724;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Paiement</h1>
+    <div id="message" class="success-message">Paiement enregistré avec succès.</div>
+    <form id="paymentForm">
+        <label for="matricule">Matricule</label>
+        <input type="text" id="matricule" name="matricule" required>
+
+        <label for="filiere">Filière</label>
+        <input type="text" id="filiere" name="filiere" required>
+
+        <label for="niveau">Niveau</label>
+        <select id="niveau" name="niveau" required>
+            <option value="">Sélectionner un niveau</option>
+            <option value="1ère année">1ère année</option>
+            <option value="2ème année">2ème année</option>
+            <option value="3ème année">3ème année</option>
+            <option value="Master">Master</option>
+        </select>
+
+        <label for="montant">Montant</label>
+        <input type="number" id="montant" name="montant" min="0" step="0.01" required>
+
+        <label for="objet">Objet</label>
+        <input type="text" id="objet" name="objet" required>
+
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('paymentForm');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            message.style.display = 'block';
+            form.reset();
+            document.getElementById('matricule').focus();
+        });
+    </script>
+</body>
+</html>
